@@ -27,9 +27,9 @@ var friction : int = 600
 
 var waypoints : Array
 
-onready var start_point : Node2D = get_parent().get_node("StartPoint")
 onready var waypoint_1 : Node2D = get_parent().get_node("Waypoint")
 onready var waypoint_2 : Node2D = get_parent().get_node("Waypoint2")
+onready var waypoint_3 : Node2D = get_parent().get_node("Waypoint3")
 
 onready var DetectWaypointArea : Area2D = $DetectWaypoint
 onready var timer : Timer = $Timer
@@ -40,7 +40,7 @@ var max_waypoint : int
 
 func _ready():
 	timer.start(4)
-	waypoints = [waypoint_1, waypoint_2, start_point]
+	waypoints = [waypoint_1, waypoint_2, waypoint_3]
 	max_waypoint = waypoints.size()
 
 func _physics_process(delta):
@@ -64,7 +64,7 @@ func shotgun_blast(delta):
 func move(delta):
 	var waypoint_direction = (waypoints[cur_waypoint].global_position - global_position).normalized()
 	
-	if DetectWaypointArea.is_in_area() and DetectWaypointArea.area.get_parent().id == cur_waypoint:
+	if DetectWaypointArea.is_in_area() and DetectWaypointArea.area.id == cur_waypoint:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		
 		if velocity == Vector2.ZERO:

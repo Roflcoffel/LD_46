@@ -28,12 +28,13 @@ func shoot(velocity : Vector2, delta : float):
 		cur_shots += 1
 		var inst_shot = Shot.instance()
 		inst_shot.global_position = position
+		inst_shot.Angle = velocity
 		main_scene.add_child(inst_shot)
 		basic_shots.append(inst_shot)
 
-	for shot in basic_shots:
-		if is_instance_valid(shot):
-			shot.shoot(velocity, delta)
+#	for shot in basic_shots:
+#		if is_instance_valid(shot):
+#			shot.shoot(velocity, delta)
 	
 
 
