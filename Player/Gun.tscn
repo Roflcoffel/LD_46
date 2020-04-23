@@ -2,17 +2,17 @@
 
 [ext_resource path="res://Art/Gun.png" type="Texture" id=1]
 [ext_resource path="res://Player/Gun.gd" type="Script" id=2]
-[ext_resource path="res://Player/DetectGunArea.gd" type="Script" id=3]
-[ext_resource path="res://Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Overlaps/DetectArea.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Overlaps/Hurtbox.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.09902
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 radius = 5.09902
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 2.0
+[sub_resource type="CircleShape2D" id=3]
+radius = 11.0
 
 [node name="Gun" type="KinematicBody2D"]
 collision_layer = 2
@@ -28,17 +28,15 @@ shape = SubResource( 1 )
 collision_layer = 2
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-shape = SubResource( 3 )
-
-[node name="DetectGunArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-script = ExtResource( 3 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectGunArea"]
 shape = SubResource( 2 )
+
+[node name="DetectGunArea" parent="." instance=ExtResource( 3 )]
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="DetectGunArea" index="0"]
+shape = SubResource( 3 )
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
-[connection signal="area_entered" from="DetectGunArea" to="DetectGunArea" method="_on_DetectGunArea_area_entered"]
-[connection signal="area_exited" from="DetectGunArea" to="DetectGunArea" method="_on_DetectGunArea_area_exited"]
 
 [editable path="Hurtbox"]
+
+[editable path="DetectGunArea"]

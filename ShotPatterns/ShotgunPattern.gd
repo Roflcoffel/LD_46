@@ -29,10 +29,11 @@ func shoot(delta: float):
 	shotgun_cooldown.tick(delta)
 		
 	if cur_shot < num_shots and shotgun_cooldown.is_ready():
-		cur_shot += 1
+		var offset = line_pattern.position + angle_to_vector(spread[cur_shot]) * 40
 		patterns.append(
-			line_pattern_file.new(line_pattern.shot_path, line_pattern.main_scene, line_pattern.num_shots, line_pattern.position)
+			line_pattern_file.new(line_pattern.shot_path, line_pattern.main_scene, line_pattern.num_shots, offset)
 		)
+		cur_shot += 1
 
 	for i in patterns.size():
 		patterns[i].shoot(angle_to_vector(spread[i]), delta)
