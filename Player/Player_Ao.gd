@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var Health: int = 3
+export var Health: int = 3 setget set_health
 export var Max_Speed: int = 200
 
 var Acceleration: int = 400
@@ -8,6 +8,18 @@ var Friction: int = 1000
 
 var velocity : Vector2 = Vector2.ZERO
 var input_vector : Vector2
+
+onready var health_indicator = $HealthIndicator
+
+func _ready():
+	health_indicator.set_hearts(Health)
+
+func set_health(value : int):
+	print("Set Health")
+	Health = max(value, 0)
+	health_indicator.set_hearts(Health)
+	if Health == 0:
+		print("Dead")
 
 func _physics_process(delta):
 	input_vector = Vector2.ZERO
@@ -27,7 +39,4 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity)
 
 func _on_Hurtbox_area_entered(_area):
-	Health -= 1
-
-	if Health <= 0:
-		print("Game Over")
+	self.Health -= 1

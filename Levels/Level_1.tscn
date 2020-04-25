@@ -30,17 +30,15 @@ position = Vector2( 288, 320 )
 position = Vector2( 320, 96 )
 
 [node name="RainPattern2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 531, 36 )
+position = Vector2( 566, 15 )
 
 [node name="CollisionShape2D" parent="RainPattern2" index="0"]
-position = Vector2( 31, -21 )
 shape = SubResource( 1 )
 
 [node name="RainPattern" parent="." instance=ExtResource( 6 )]
-position = Vector2( 96, 51 )
+position = Vector2( 73, 15 )
 
 [node name="CollisionShape2D" parent="RainPattern" index="0"]
-position = Vector2( -20, -36 )
 shape = SubResource( 2 )
 
 [node name="Waypoint2" parent="." instance=ExtResource( 5 )]

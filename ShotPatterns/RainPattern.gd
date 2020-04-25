@@ -1,7 +1,7 @@
 extends Area2D
 
 var Cooldown = load("res://Scripts/Cooldown.gd")
-var rain_spawn_rate = Cooldown.new(0.2)
+var rain_spawn_rate = Cooldown.new(0.1)
 
 var max_rain : int = 50
 var cur_shot : int = 0
@@ -25,16 +25,15 @@ func _ready():
 	size = colshape2d.shape.extents
 
 func _physics_process(delta):
-	pass
-	#rain_spawn_rate.tick(delta)
+	rain_spawn_rate.tick(delta)
 	
-	#if rain_spawn_rate.is_ready():
-	#	shot_inst = shot_scene.instance()
-	#	shot_inst.global_position = random_pos_in_area()
-	#	main_scene.add_child(shot_inst)
-	#	rain_shots.append(shot_inst)
-
-	#shot_inst.shoot(velocity, delta)
+	if rain_spawn_rate.is_ready():
+		shot_inst = shot_scene.instance()
+		shot_inst.global_position = random_pos_in_area()
+		shot_inst.Angle = velocity
+		main_scene.add_child(shot_inst)
+		rain_shots.append(shot_inst)
 
 func random_pos_in_area() -> Vector2:
-	return Vector2((randi() % int(size.x)) - (size.x/2) + center.x, (randi() % int(size.y)) - (size.y/2) + center.y)
+	return Vector2((randi() % int(size.x)) - (size.x/2) + center.x, size.y/2)
+

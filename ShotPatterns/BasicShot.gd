@@ -6,9 +6,6 @@ var Max_Speed : int = 200
 var Velocity : Vector2 = Vector2.ZERO
 var Angle : Vector2 = Vector2.ZERO
 
-#func shoot(angle : Vector2, delta : float) -> void:
-#	Velocity = Velocity.move_toward(angle * Max_Speed, Acceleration * delta)
-
 func _physics_process(delta):
 	Velocity = Velocity.move_toward(Angle * Max_Speed, Acceleration * delta)
 	Velocity = move_and_slide(Velocity)
