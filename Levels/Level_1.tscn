@@ -57,6 +57,7 @@ position = Vector2( 223, 180 )
 [node name="Waypoint3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 317, 21 )
 id = 2
+[connection signal="energy_changed" from="Gun" to="CanvasLayer/UserInterface" method="_on_Gun_energy_changed"]
 
 [editable path="RainPattern2"]
 
