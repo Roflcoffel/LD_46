@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Art/AoSkyTop.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player_Ao.tscn" type="PackedScene" id=2]
@@ -7,12 +7,20 @@
 [ext_resource path="res://Overlaps/Waypoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ShotPatterns/RainPattern.tscn" type="PackedScene" id=6]
 [ext_resource path="res://UI/UserInterface.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Overlaps/ChargeStation.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Overlaps/DechargeStation.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 70, 10 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 70, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 175, 61 )
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 12.083
 
 [node name="Level_1" type="Node2D"]
 
@@ -57,8 +65,44 @@ position = Vector2( 223, 180 )
 [node name="Waypoint3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 317, 21 )
 id = 2
+
+[node name="ChargeStation" parent="." instance=ExtResource( 8 )]
+position = Vector2( 320, 190 )
+
+[node name="ChargeIndicator" parent="ChargeStation" index="0"]
+frame = 9
+
+[node name="DechargeStation3" parent="." instance=ExtResource( 9 )]
+position = Vector2( 220, 60 )
+
+[node name="ChargeIndicator" parent="DechargeStation3" index="0"]
+frame = 6
+
+[node name="CollisionArea" parent="DechargeStation3/DetectBody" index="0"]
+position = Vector2( 100, -1 )
+shape = SubResource( 3 )
+
+[node name="DechargeStation2" parent="." instance=ExtResource( 9 )]
+position = Vector2( 413, 62 )
+
+[node name="ChargeIndicator" parent="DechargeStation2" index="0"]
+frame = 6
+
+[node name="DetectBody" parent="DechargeStation2" index="1"]
+position = Vector2( -3.05176e-05, -3.8147e-06 )
+
+[node name="CollisionArea" parent="DechargeStation2/DetectBody" index="0"]
+position = Vector2( 6.10352e-05, -2.99999 )
+shape = SubResource( 4 )
+disabled = true
 [connection signal="energy_changed" from="Gun" to="CanvasLayer/UserInterface" method="_on_Gun_energy_changed"]
 
 [editable path="RainPattern2"]
 
 [editable path="RainPattern"]
+
+[editable path="ChargeStation"]
+
+[editable path="DechargeStation3"]
+
+[editable path="DechargeStation2"]

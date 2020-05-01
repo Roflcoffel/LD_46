@@ -9,6 +9,7 @@ export var Friction : int = 1000
 var Energy : int = 0 setget set_energy
 var energy_rate : Timer
 
+
 var velocity = Vector2.ZERO
 var player_direction = Vector2.ZERO
 
@@ -19,9 +20,6 @@ onready var health_indicator = $HealthIndicator
 
 signal energy_changed
 
-# Rita en, Under och Progress,
-# Progress kan vara små blåa kristaler
-# Under Rosa eller svart bakgrund
 func _ready():
 	energy_rate = Timer.new()
 	energy_rate.wait_time = 0.1
